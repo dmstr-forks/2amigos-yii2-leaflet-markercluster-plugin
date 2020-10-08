@@ -101,10 +101,15 @@ class MarkerCluster extends Plugin
             $js[] = "$.getJSON('$this->url', function(data){
                 if(data.markers){
                     $.each(data.markers, function(){
-                        var marker = L.marker(L.latLng(this.lat, this.lng));
+                        var marker = L.marker(L.latLng(this.lat, this.lng), {
+                            id: this.id
+                        });
                         if(this.popup){
                             marker.bindPopup(this.popup);
                         }
+                        marker.on('click', function(e) {
+                            onMarkerClick(e);
+                        });
                         $name.addLayer(marker);
                     });
                 }
