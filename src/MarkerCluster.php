@@ -95,7 +95,7 @@ class MarkerCluster extends Plugin
         $options = $this->getOptions();
         $name = $this->getName(true);
         $map = $this->map;
-        $js[] = "var $name = L.markerClusterGroup($options);";
+        $js[] = "$name = L.markerClusterGroup($options);";
 
         if ($this->url) {
             $js[] = "$.getJSON('$this->url', function(data){
@@ -109,6 +109,9 @@ class MarkerCluster extends Plugin
                         }
                         marker.on('click', function(e) {
                             onMarkerClick(e);
+                        });
+                        marker.on('mouseover',function(e) {
+                            onMarkerHover(marker, e);
                         });
                         $name.addLayer(marker);
                     });
