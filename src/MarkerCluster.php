@@ -102,7 +102,8 @@ class MarkerCluster extends Plugin
                 if(data.markers){
                     $.each(data.markers, function(){
                         var marker = L.marker(L.latLng(this.lat, this.lng), {
-                            id: this.id
+                            id: this.id,
+                            data: this.data
                         });
                         if(this.popup){
                             marker.bindPopup(this.popup);
